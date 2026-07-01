@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificate Download System</title>
+  <title>Certificate Download | World Robot Olympiad 2026</title>
   <link rel="icon" type="image/png" href="https://drive.google.com/uc?export=view&id=12lTmiNlwGb3GvC-FHZPrrhaCFWO76GZ_">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -250,16 +250,16 @@
     }
 
     .comp-icon {
-      width: 36px;
-      height: 36px;
+      width: 54px;         /* ขยายกล่องให้กว้างขึ้น */
+      height: 54px;        /* ขยายกล่องให้สูงขึ้น */
       background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
       border-radius: var(--radius-sm);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 2rem;     /* ปรับฟอนต์ในนี้ให้พอดีกล่อง */
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(78,64,153,0.25);
+      box-shadow: 0 4px 12px rgba(0, 133, 66, 0.2);
     }
 
     .comp-category-label {
@@ -1108,67 +1108,93 @@
 
     /* ════ RENDER COMPETITION BLOCK ════ */
     function renderCompBlock(tableData) {
-      const container = document.getElementById('tablesMainContainer');
-      const thdr = t('tableHeaders');
+  const container = document.getElementById('tablesMainContainer');
+  const thdr = t('tableHeaders');
 
-      const section = document.createElement('div');
-      section.className = 'comp-section';
+  const section = document.createElement('div');
+  section.className = 'comp-section';
 
-      section.innerHTML = `
-        <div class="comp-header">
-          <div class="comp-icon">🤖</div>
-          <div>
-            <div class="comp-category-label">${t('category')}</div>
-            <div class="comp-title">${tableData.competitionName}</div>
-          </div>
+  // 🎨 1. ตรรกะเช็กชื่อรุ่นเพื่อเลือกสีเส้นคั่นและสีข้อความแบบไล่เฉด (Linear Gradient)
+  const compName = tableData.competitionName.toLowerCase();
+  let dividerGradient = 'linear-gradient(90deg, #cbd5e1, #94a3b8)'; // สีเทา (Fallback)
+
+  if (compName.includes('elementary')) {
+    // 🟢 สีเขียว (Emerald to Mint)
+    dividerGradient = 'linear-gradient(90deg, #008542 0%, #22c55e 100%)';
+  } else if (compName.includes('junior')) {
+    // 🔴 สีแดง (Crimson to Coral)
+    dividerGradient = 'linear-gradient(90deg, #e11d48 0%, #fb7185 100%)';
+  } else if (compName.includes('senior')) {
+    // 🔵 สีน้ำเงิน (Royal Blue to Sky Blue)
+    dividerGradient = 'linear-gradient(90deg, #1d4ed8 0%, #60a5fa 100%)';
+  }
+
+  section.innerHTML = `
+    <div class="comp-header" style="display: flex; align-items: center; gap: 18px; padding: 1.5rem 1.75rem 1.25rem 1.75rem;">
+      
+      <div class="comp-icon" style="font-size: 3.2rem; line-height: 1;">🤖</div>
+      
+      <div>
+        <div class="comp-category-label" style="margin-bottom: 2px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b;">
+          ${t('category')}
         </div>
-        <div style="overflow-x: auto;">
-          <table class="data-table" id="tbl-${tableData.competitionName.replace(/\s+/g,'_')}">
-            <thead>
-              <tr>
-                <th style="width:72px;">${thdr[0]}</th>
-                <th style="width:90px;">${thdr[1]}</th>
-                <th>${thdr[2]}</th>
-                <th>${thdr[3]}</th>
-              </tr>
-            </thead>
-            <tbody id="tbody-${tableData.competitionName.replace(/\s+/g,'_')}"></tbody>
-          </table>
+        
+        <div class="comp-title" style="font-size: clamp(2.0rem, 5vw, 3.0rem); font-weight: 900; background: ${dividerGradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; width: fit-content; line-height: 1.05; letter-spacing: -0.03em;">
+          ${tableData.competitionName}
         </div>
-      `;
+        
+      </div>
+    </div>
+    
+    <div class="comp-divider" style="height: 8px; background: ${dividerGradient}; border-radius: 99px; margin: 16px auto 20px auto; width: 94%;"></div>
+    
+    <div style="overflow-x: auto;">
+      <table class="data-table" id="tbl-${tableData.competitionName.replace(/\s+/g,'_')}">
+        <thead>
+          <tr>
+            <th style="width:72px;">${thdr[0]}</th>
+            <th style="width:90px;">${thdr[1]}</th>
+            <th>${thdr[2]}</th>
+            <th>${thdr[3]}</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-${tableData.competitionName.replace(/\s+/g,'_')}"></tbody>
+      </table>
+    </div>
+  `;
 
-      container.appendChild(section);
+  container.appendChild(section);
 
-      const tbody = document.getElementById(`tbody-${tableData.competitionName.replace(/\s+/g,'_')}`);
+  const tbody = document.getElementById(`tbody-${tableData.competitionName.replace(/\s+/g,'_')}`);
 
-      if (!tableData.teams.length) {
-        tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-msg">${t('emptyTeams')}</div></div></td></tr>`;
-        return;
-      }
+  if (!tableData.teams.length) {
+    tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-msg">${t('emptyTeams')}</div></div></td></tr>`;
+    return;
+  }
 
-      tableData.teams.forEach((team, idx) => {
-        const uid = `det-${tableData.competitionName.replace(/\s+/g,'')}-${idx}`;
-        const rankNum = parseInt(team.rank);
-        const rankClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : '';
+  tableData.teams.forEach((team, idx) => {
+    const uid = `det-${tableData.competitionName.replace(/\s+/g,'')}-${idx}`;
+    const rankNum = parseInt(team.rank);
+    const rankClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : '';
 
-        const trMain = document.createElement('tr');
-        trMain.innerHTML = `
-          <td><span class="rank-chip ${rankClass}">${team.rank}</span></td>
-          <td style="font-size:1.1rem;">${team.medal}</td>
-          <td><div class="team-name-cell" title="${team.teamName}">${team.teamName}</div></td>
-          <td><div class="inst-cell" title="${team.institution}">${team.institution}</div></td>
-        `;
+    const trMain = document.createElement('tr');
+    trMain.innerHTML = `
+      <td><span class="rank-chip ${rankClass}">${team.rank}</span></td>
+      <td style="font-size:1.1rem;">${team.medal}</td>
+      <td><div class="team-name-cell" title="${team.teamName}">${team.teamName}</div></td>
+      <td><div class="inst-cell" title="${team.institution}">${team.institution}</div></td>
+    `;
 
-        const trDetail = document.createElement('tr');
-        trDetail.id = uid;
-        trDetail.className = 'detail-row';
-        trDetail.innerHTML = `<td colspan="4"><div class="detail-inner"><div style="text-align:center;padding:1.5rem;color:var(--text-faint);font-weight:600;">${t('loadingDetails')}</div></div></td>`;
+    const trDetail = document.createElement('tr');
+    trDetail.id = uid;
+    trDetail.className = 'detail-row';
+    trDetail.innerHTML = `<td colspan="4"><div class="detail-inner"><div style="text-align:center;padding:1.5rem;color:var(--text-faint);font-weight:600;">${t('loadingDetails')}</div></div></td>`;
 
-        trMain.onclick = () => toggleDetail(trMain, trDetail, team, tableData);
-        tbody.appendChild(trMain);
-        tbody.appendChild(trDetail);
-      });
-    }
+    trMain.onclick = () => toggleDetail(trMain, trDetail, team, tableData);
+    tbody.appendChild(trMain);
+    tbody.appendChild(trDetail);
+  });
+}
 
     /* ════ ACCORDION TOGGLE ════ */
     async function toggleDetail(trMain, trDetail, team, tableData) {
