@@ -48,15 +48,18 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Prompt', sans-serif;
-      background: linear-gradient(160deg, #090A1A 0%, #0D0E2D 50%, #15183F 100%); /* เปลี่ยนพื้นหลังเว็บเป็นธีมมืด */
-      background-attachment: fixed;
-      color: var(--text-body);
-      min-height: 100vh;
-      padding-bottom: 90px;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9f8 100%);
+    background-attachment: fixed;
+    color: #212529;
+}
+
+/* แถม: สไตล์สำหรับกล่องข้อความ (Card) เพื่อให้ลอยเด่นขึ้นมาจากพื้นหลัง */
+.card-custom {
+    background: #ffffff;
+    border: 1px solid #e0e6e3;
+    box-shadow: 0 4px 6px rgba(0, 102, 51, 0.03); /* เงาสีเขียวจาง ๆ */
+    border-radius: 8px;
+}
     /* ══════════════════════════════════════════════
        HEADER SECTION
        ══════════════════════════════════════════════ */
