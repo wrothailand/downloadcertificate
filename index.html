@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     /* ══════════════════════════════════════════════
        ROOT TOKENS - UPDATED FOR WRO 2026 THEME (Robots Meet Culture)
@@ -24,42 +25,47 @@
       --teal-200: #BCE6FF; /* ฟ้าพาสเทล */
       --teal-100: #E3F2FD; /* ฟ้าไอซ์บลูอ่อน */
       --teal-50:  #F4F8FC; /* ขาวอมฟ้านวล */
+
       --gold-400: #F39200; /* สีส้มทองจากกีตาร์/ทรัมเป็ต */
       --gold-200: #F7D57F; 
       --gold-100: #FFF5D6;
+
       --surface-0: #ffffff;
       --surface-1: #F5F7FA; /* ปรับพื้นผิวให้ออกโทนขาว-ฟ้า-เทา */
       --surface-2: #EAF0F6;
-      --surface-glass: rgba(13, 14, 45, 0.7); /* ปรับเป็น Dark Glassmorphic */
+      --surface-glass: rgba(255,255,255,0.75);
       --surface-glass-dark: rgba(255,255,255,0.48);
       --border-glass: rgba(28,30,83,0.1);
-      --border-light: rgba(255,255,255,0.08);
-      --text-heading: #ffffff; /* เปลี่ยนเป็นสีขาวเพื่อให้เข้ากับตารางธีมมืด */
-      --text-body: #e2e8f0;    /* สีตัวอักษรเนื้อหาแบบสว่าง */
-      --text-muted: #94a3b8;   /* สีข้อความรอง */
-      --text-faint: #64748b;
+      --border-light: rgba(28,30,83,0.06);
+
+      --text-heading: #1C1E53; /* ใช้สีน้ำเงินเข้มแทนเขียวเข้ม */
+      --text-body: #252841;
+      --text-muted: #565C83;
+      --text-faint: #8E95BE;
+
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 22px;
       --radius-xl: 32px;
-      --shadow-card: none;
-      --shadow-hover: 0 0 15px rgba(41, 169, 224, 0.25);
+
+      --shadow-card: 0 2px 16px rgba(28,30,83,0.05), 0 1px 4px rgba(28,30,83,0.03);
+      --shadow-hover: 0 8px 32px rgba(28,30,83,0.1), 0 2px 8px rgba(28,30,83,0.05);
       --shadow-float: 0 16px 48px rgba(28,30,83,0.14);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-    background: linear-gradient(180deg, #ffffff 0%, #f7f9f8 100%);
-    background-attachment: fixed;
-    color: #212529;
-}
 
-/* แถม: สไตล์สำหรับกล่องข้อความ (Card) เพื่อให้ลอยเด่นขึ้นมาจากพื้นหลัง */
-.card-custom {
-    background: #ffffff;
-    border: 1px solid #e0e6e3;
-    box-shadow: 0 4px 6px rgba(0, 102, 51, 0.03); /* เงาสีเขียวจาง ๆ */
-    border-radius: 8px;
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(160deg, #EBF3FA 0%, #F4F7FC 40%, #EFF2F9 100%);
+      background-attachment: fixed;
+      color: var(--text-body);
+      min-height: 100vh;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
     /* ══════════════════════════════════════════════
        HEADER SECTION
        ══════════════════════════════════════════════ */
@@ -71,6 +77,7 @@
       border-radius: 0 0 var(--radius-xl) var(--radius-xl);
       box-shadow: 0 8px 40px rgba(28,30,83,0.2);
     }
+
     /* กล่องจัดแถวบนสุด (Logo + Lang Button) */
     .header-top-row {
       display: flex;
@@ -79,6 +86,7 @@
       margin-bottom: 2rem; /* เพิ่มระยะห่างลงมาหา Badge ด้านล่าง */
       width: 100%;
     }
+
     /* ขยายขนาดโลโก้เวอร์ชัน Desktop */
     .header-logo {
       height: 105px; /* ปรับเพิ่มจาก 75px */
@@ -88,6 +96,7 @@
       filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
       transition: height 0.2s ease;
     }
+
     /* ปุ่มเปลี่ยนภาษา */
     .lang-btn {
       background: rgba(255,255,255,0.15);
@@ -108,6 +117,7 @@
       background: rgba(255,255,255,0.28); 
       transform: scale(1.04); 
     }
+
     /* ตกแต่งวงกลมฉากหลังของ Header */
     .site-header::before,
     .site-header::after {
@@ -119,6 +129,7 @@
     }
     .site-header::before { width: 400px; height: 400px; top: -160px; right: -80px; }
     .site-header::after  { width: 260px; height: 260px; bottom: -120px; left: -60px; }
+
     .header-badge {
       display: inline-flex;
       align-items: center;
@@ -135,6 +146,7 @@
       margin-bottom: 1rem;
       backdrop-filter: blur(6px);
     }
+
     .header-title {
       font-size: clamp(1.8rem, 5vw, 2.8rem);
       font-weight: 800;
@@ -142,12 +154,14 @@
       line-height: 1.15;
       letter-spacing: -0.02em;
     }
+
     .header-sub {
       font-size: 1rem;
       font-weight: 400;
       color: rgba(255,255,255,0.75);
       margin-top: 0.5rem;
     }
+
     /* ══════════════════════════════════════════════
        FLOATING EVENT SELECTOR
        ══════════════════════════════════════════════ */
@@ -158,28 +172,32 @@
       position: relative;
       z-index: 10;
     }
+
     .selector-card {
       background: var(--surface-glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(41, 169, 224, 0.35); /* Glowing Border สีฟ้าอ่อน */
+      border: 1px solid rgba(255,255,255,0.8);
       border-radius: var(--radius-lg);
       padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-float);
     }
+
     .selector-label {
       font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--teal-400);
+      color: var(--teal-700);
       margin-bottom: 0.5rem;
     }
+
     .selector-card select {
       width: 100%;
-      border: 1.5px solid rgba(255,255,255,0.1);
+      border: 1.5px solid var(--border-glass);
       border-radius: var(--radius-sm);
-      background: #0f1126;
-      color: #ffffff;
+      background: var(--surface-0);
+      color: var(--text-body);
       font-family: 'Prompt', sans-serif;
       font-size: 1rem;
       font-weight: 500;
@@ -195,8 +213,9 @@
     }
     .selector-card select:focus {
       border-color: var(--teal-500);
-      box-shadow: 0 0 8px rgba(41,169,224,0.4);
+      box-shadow: 0 0 0 3px rgba(41,169,224,0.15);
     }
+
     /* ══════════════════════════════════════════════
        MAIN CONTENT AREA
        ══════════════════════════════════════════════ */
@@ -205,58 +224,61 @@
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     /* ══════════════════════════════════════════════
-       COMPETITION SECTION (Glowing Borders Applied)
+       COMPETITION SECTION
        ══════════════════════════════════════════════ */
     .comp-section {
       background: var(--surface-glass);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(82, 114, 242, 0.3); /* ขอบสว่างกว่าพื้นหลังแบบบางเบา (Neon-ish Border) */
+      border: 1px solid rgba(255,255,255,0.75);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-card);
       overflow: hidden;
       margin-bottom: 1.5rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: box-shadow 0.25s;
     }
-    .comp-section:hover {
-      border-color: rgba(41, 169, 224, 0.6); /* เรืองแสงเพิ่มขึ้นเมื่อ hover */
-    }
+
     .comp-header {
       padding: 1.25rem 1.5rem;
-      background: linear-gradient(90deg, rgba(41,169,224,0.08) 0%, transparent 100%);
+      background: linear-gradient(90deg, rgba(41,169,224,0.05) 0%, transparent 100%);
       border-bottom: 1px solid var(--border-light);
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .comp-icon {
-      width: 54px;         
-      height: 54px;        
+      width: 54px;         /* ขยายกล่องให้กว้างขึ้น */
+      height: 54px;        /* ขยายกล่องให้สูงขึ้น */
       background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
       border-radius: var(--radius-sm);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;     
+      font-size: 2rem;     /* ปรับฟอนต์ในนี้ให้พอดีกล่อง */
       flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(41, 169, 224, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 133, 66, 0.2);
     }
+
     .comp-category-label {
       font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      color: var(--teal-400);
+      color: var(--teal-500);
       line-height: 1;
       margin-bottom: 4px;
     }
+
     .comp-title {
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--text-heading);
       line-height: 1.2;
     }
+
     /* ══════════════════════════════════════════════
        TABLE
        ══════════════════════════════════════════════ */
@@ -265,10 +287,12 @@
       border-collapse: collapse;
       font-size: 0.95rem;
     }
+
     .data-table thead tr {
-      background: rgba(41,169,224,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(41,169,224,0.03);
+      border-bottom: 1px solid var(--border-glass);
     }
+
     .data-table thead th {
       padding: 12px 16px;
       font-weight: 700;
@@ -278,19 +302,23 @@
       color: var(--text-muted);
       white-space: nowrap;
     }
+
     .data-table tbody tr {
       border-bottom: 1px solid var(--border-light);
       cursor: pointer;
       transition: background 0.15s;
     }
+
     .data-table tbody tr:last-child { border-bottom: none; }
-    .data-table tbody tr:hover { background: rgba(41,169,224,0.05); }
-    .data-table tbody tr.row-active { background: rgba(41,169,224,0.12) !important; }
+    .data-table tbody tr:hover { background: rgba(41,169,224,0.02); }
+    .data-table tbody tr.row-active { background: rgba(41,169,224,0.05) !important; }
+
     .data-table tbody td {
       padding: 16px 16px;
       vertical-align: middle;
       color: var(--text-body);
     }
+
     .rank-chip {
       display: inline-flex;
       align-items: center;
@@ -300,21 +328,23 @@
       border-radius: 50%;
       font-weight: 800;
       font-size: 0.85rem;
-      background: rgba(255,255,255,0.1);
-      color: #94a3b8;
+      background: var(--surface-2);
+      color: var(--text-muted);
     }
     .rank-chip.rank-1 { background: linear-gradient(135deg, #FFF5CC, #F7E87A); color: #7a5c00; box-shadow: 0 2px 8px rgba(212,175,55,0.35); }
     .rank-chip.rank-2 { background: linear-gradient(135deg, #F0F0F0, #D4D4D4); color: #555; }
     .rank-chip.rank-3 { background: linear-gradient(135deg, #FFE8D8, #E8A87C); color: #7a3800; }
+
     .team-name-cell {
       font-size: 1.15rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-heading);
       max-width: 260px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
     .inst-cell {
       font-size: 1.0rem;
       max-width: 220px;
@@ -323,23 +353,27 @@
       white-space: nowrap;
       color: var(--text-muted);
     }
+
     /* ══════════════════════════════════════════════
        ACCORDION DETAIL ROW
        ══════════════════════════════════════════════ */
     .detail-row { display: none; }
     .detail-row.show-detail { display: table-row; }
     .detail-row td { padding: 0 !important; }
+
     .detail-inner {
       padding: 1.25rem 1.5rem;
-      background: rgba(15, 18, 48, 0.85);
+      background: rgba(240,246,252,0.75);
       backdrop-filter: blur(8px);
-      border-top: 2px solid rgba(41, 169, 224, 0.2);
+      border-top: 2px solid var(--teal-100);
       animation: slideDown 0.22s ease;
     }
+
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
     /* ══════════════════════════════════════════════
        DETAIL CONTENT PANELS
        ══════════════════════════════════════════════ */
@@ -349,20 +383,23 @@
       gap: 1rem;
       margin-bottom: 1.25rem;
     }
+
     .detail-panel {
-      background: #0f1230;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-0);
+      border: 1px solid var(--border-glass);
       border-radius: var(--radius-md);
       padding: 1rem 1.15rem;
     }
+
     .panel-label {
       font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      color: var(--teal-400);
+      color: var(--teal-500);
       margin-bottom: 0.75rem;
     }
+
     .info-row {
       display: flex;
       gap: 8px;
@@ -371,20 +408,23 @@
       font-size: 0.9rem;
     }
     .info-row .info-key { color: var(--text-muted); font-weight: 500; white-space: nowrap; }
-    .info-row .info-val { color: #ffffff; font-weight: 600; word-break: break-word; }
+    .info-row .info-val { color: var(--text-heading); font-weight: 600; word-break: break-word; }
+
     .score-stack { display: flex; flex-direction: column; gap: 6px; }
+
     .score-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: var(--surface-1);
+      border: 1px solid var(--border-light);
       border-radius: var(--radius-sm);
       padding: 7px 12px;
       font-size: 0.88rem;
     }
     .score-key { color: var(--text-muted); font-weight: 500; }
-    .score-val { color: var(--teal-400); font-weight: 800; font-size: 1rem; }
+    .score-val { color: var(--teal-500); font-weight: 800; font-size: 1rem; }
+
     /* ══════════════════════════════════════════════
        AWARD BADGES
        ══════════════════════════════════════════════ */
@@ -394,6 +434,7 @@
       gap: 8px;
       margin-bottom: 1rem;
     }
+
     .award-pill {
       display: inline-flex;
       align-items: center;
@@ -404,13 +445,15 @@
       font-weight: 700;
       white-space: nowrap;
     }
-    .award-pill.rank-pill { background: rgba(243, 146, 0, 0.15); color: #f7d57f; border: 1px solid rgba(243, 146, 0, 0.4); }
-    .award-pill.medal-pill { background: rgba(78, 64, 153, 0.2); color: #b4a7ff; border: 1px solid rgba(78, 64, 153, 0.5); }
+    .award-pill.rank-pill { background: var(--gold-100); color: #7a5c00; border: 1px solid var(--gold-200); }
+    .award-pill.medal-pill { background: #f2efff; color: #4E4099; border: 1px solid #dcd5ff; }
+
     .rookie-pill {
       background: linear-gradient(135deg, #FF9E1B, #F39200);
       color: #ffffff;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     }
+
     /* ══════════════════════════════════════════════
        MEMBER GRID
        ══════════════════════════════════════════════ */
@@ -419,26 +462,29 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      color: var(--teal-400);
+      color: var(--teal-700);
       border-left: 3px solid var(--teal-500);
       padding-left: 8px;
       margin-bottom: 0.85rem;
     }
+
     .member-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 10px;
     }
+
     .member-card {
-      background: #0f1230;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-0);
+      border: 1.5px solid var(--border-glass);
       border-radius: var(--radius-md);
       padding: 0.9rem 1rem;
       cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.34,1.4,0.64,1), border-color 0.2s;
+      transition: transform 0.2s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.2s, border-color 0.2s;
       position: relative;
       overflow: hidden;
     }
+
     .member-card::before {
       content: '';
       position: absolute;
@@ -450,11 +496,15 @@
       transition: transform 0.25s ease;
       border-radius: 3px 3px 0 0;
     }
+
     .member-card:hover {
       transform: translateY(-3px);
-      border-color: var(--teal-400);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--teal-200);
     }
+
     .member-card:hover::before { transform: scaleX(1); }
+
     .member-role {
       font-size: 0.73rem;
       font-weight: 700;
@@ -463,14 +513,16 @@
       color: var(--text-faint);
       margin-bottom: 4px;
     }
+
     .member-name {
       font-size: 0.97rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-heading);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .member-action-hint {
       font-size: 0.74rem;
       color: var(--teal-500);
@@ -480,10 +532,12 @@
       align-items: center;
       gap: 4px;
     }
+
     /* ══════════════════════════════════════════════
        SWAL CERT MENU
        ══════════════════════════════════════════════ */
     .cert-btn-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+
     .cert-option-btn {
       display: flex;
       align-items: center;
@@ -503,6 +557,7 @@
       box-shadow: 0 2px 10px rgba(28,30,83,0.06);
       transform: translateX(2px);
     }
+
     .cert-option-icon {
       width: 40px; height: 40px;
       border-radius: var(--radius-sm);
@@ -510,10 +565,12 @@
       font-size: 1.3rem;
       flex-shrink: 0;
     }
+
     .cert-option-info { flex: 1; min-width: 0; }
     .cert-option-title { font-size: 0.95rem; font-weight: 700; color: var(--text-heading); display: block; }
     .cert-option-id { font-size: 0.76rem; color: var(--text-faint); font-weight: 500; }
     .cert-option-arrow { font-size: 1.1rem; color: var(--text-faint); }
+
     /* ══════════════════════════════════════════════
        PREVIEW MODAL
        ══════════════════════════════════════════════ */
@@ -528,6 +585,7 @@
       align-items: flex-start;
       justify-content: center;
     }
+
     .cert-preview-wrap {
       display: flex;
       flex-direction: column;
@@ -535,6 +593,7 @@
       gap: 20px;
       width: 100%;
     }
+
     .zoom-bar {
       position: fixed;
       top: 14px;
@@ -550,6 +609,7 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       min-width: 240px;
     }
+
     .zoom-icon { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; }
     .zoom-bar input[type=range] {
       flex: 1;
@@ -557,23 +617,27 @@
       accent-color: var(--teal-700);
       cursor: pointer;
     }
+
     .cert-frame-wrap {
       position: relative;
       width: 1200px;
       transform-origin: top center;
       transition: transform 0.1s ease;
     }
+
     .cert-frame-img {
       width: 1200px;
       height: auto;
       display: block;
       border-radius: 6px;
     }
+
     .cert-overlay-name, .cert-overlay-id {
       position: absolute;
       pointer-events: none;
       font-family: 'Prompt', sans-serif;
     }
+
     .cert-overlay-name {
       left: 50%;
       transform: translateX(-50%);
@@ -584,6 +648,7 @@
       text-shadow: 0 0 6px rgba(255,255,255,0.9);
       white-space: nowrap;
     }
+
     .cert-overlay-id {
       font-weight: 700;
       color: var(--text-body);
@@ -592,6 +657,7 @@
       border-radius: 4px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
+
     .preview-actions {
       position: fixed;
       bottom: 0;
@@ -609,6 +675,7 @@
       border-top: 1px solid rgba(255,255,255,0.08);
       flex-wrap: wrap;
     }
+
     .btn-download {
       background: linear-gradient(135deg, var(--teal-700), var(--teal-500));
       color: #fff;
@@ -624,6 +691,7 @@
       white-space: nowrap;
     }
     .btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(41,169,224,0.4); }
+
     .btn-close-preview {
       background: rgba(255,255,255,0.1);
       color: rgba(255,255,255,0.85);
@@ -638,6 +706,7 @@
       white-space: nowrap;
     }
     .btn-close-preview:hover { background: rgba(255,255,255,0.2); }
+
     .preview-close-x {
       position: fixed;
       top: 14px;
@@ -650,45 +719,52 @@
       transition: color 0.15s, transform 0.15s;
     }
     .preview-close-x:hover { color: #fff; transform: scale(1.1) rotate(90deg); }
+
     /* ══════════════════════════════════════════════
        FOOTER
        ══════════════════════════════════════════════ */
     .site-footer {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      background: rgba(13, 14, 45, 0.85);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid var(--border-glass);
       padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
+      box-shadow: 0 -2px 20px rgba(28,30,83,0.03);
     }
+
     .footer-brand {
       font-weight: 700;
       font-size: 0.88rem;
       color: var(--text-muted);
     }
+
     .version-chip {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--surface-2);
+      border: 1px solid var(--border-glass);
       border-radius: 999px;
       padding: 4px 12px;
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-muted);
     }
+
     #v1HiddenRenderBox {
       position: absolute;
       left: -9999px;
       top: -9999px;
       background: white;
     }
+
     /* ══════════════════════════════════════════════
        RESPONSIVE / MEDIA QUERIES
        ══════════════════════════════════════════════ */
+    
     @media (max-width: 768px) {
       .site-header { 
         padding: 1.2rem 1rem 3rem; 
@@ -696,8 +772,9 @@
       .header-top-row {
         margin-bottom: 1.5rem;
       }
+      /* ขยายขนาดโลโก้เวอร์ชัน Mobile ให้สมดุล */
       .header-logo {
-        height: 75px; 
+        height: 75px; /* ปรับเพิ่มจาก 55px */
       }
       .header-title { 
         font-size: 1.7rem; 
@@ -712,53 +789,69 @@
         padding: 1rem; 
       }
     }
+
     @media (max-width: 640px) {
       .detail-panels { 
         grid-template-columns: 1fr; 
       }
     }
+
     @media (max-width: 520px) {
       .team-name-cell, .inst-cell { 
         max-width: 120px; 
       }
     }
+
     @media (max-width: 480px) {
       .member-grid { 
         grid-template-columns: 1fr 1fr; 
       }
     }
-    .cert-option-preview {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #008542; 
-      background: rgba(0, 133, 66, 0.08); 
-      padding: 5px 14px;
-      border-radius: 999px; 
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-    .cert-option-btn:hover .cert-option-preview {
-      background: #008542; 
-      color: #ffffff; 
-      box-shadow: 0 2px 8px rgba(0, 133, 66, 0.25);
-    }
+
+    /* ตกแต่งคำว่า Preview ให้เป็นปุ่มแคปซูล */
+.cert-option-preview {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #008542; /* ดึงสีเขียวธีมหลักมาใช้ */
+  background: rgba(0, 133, 66, 0.08); /* พื้นหลังเขียวอ่อนโปร่งแสง */
+  padding: 5px 14px;
+  border-radius: 999px; /* ทำทรงมนแคปซูล */
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* เอฟเฟกต์ตอบสนองเมื่อผู้ใช้งานนำเมาส์มา Hover ที่แถวใบประกาศฯ */
+.cert-option-btn:hover .cert-option-preview {
+  background: #008542; /* เปลี่ยนพื้นหลังเป็นสีเขียวทึบ */
+  color: #ffffff; /* เปลี่ยนตัวอักษรเป็นสีขาว */
+  box-shadow: 0 2px 8px rgba(0, 133, 66, 0.25);
+}
 </style>
 </head>
 <body>
+
   <!-- ════ HEADER ════ -->
   <header class="site-header">
-    <div class="header-top-row">
-      <img src="https://lh3.googleusercontent.com/d/1M03LT3R3zSw9QPNIs0H1NsmFyWmUtFFF" class="header-logo" alt="WRO 2026 Logo">
-      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">EN</button>
-    </div>
-    <div style="max-width: 680px; margin: 0 auto; position: relative; z-index: 1;">
-      <div class="header-badge">🏆 World Robot Olympiad Competition 2026</div>
-      <h1 class="header-title" id="mainTitle">ดาวน์โหลดใบประกาศนียบัตร</h1>
-      <p class="header-sub">Certificate Download System</p>
-    </div>
-  </header>
+  
+  <header class="site-header">
+  
+  <div class="header-top-row">
+    <!-- ลิงก์ตรงจาก Google Drive และคลาสขยายขนาด -->
+    <img src="https://lh3.googleusercontent.com/d/1M03LT3R3zSw9QPNIs0H1NsmFyWmUtFFF" class="header-logo" alt="WRO 2026 Logo">
+    <!-- ปุ่มเปลี่ยนภาษาพร้อม ID และ Event เดิมของคุณ -->
+    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">EN</button>
+  </div>
+
+  <!-- กล่องข้อความต้อนรับและชื่อระบบ -->
+  <div style="max-width: 680px; margin: 0 auto; position: relative; z-index: 1;">
+    <div class="header-badge">🏆 World Robot Olympiad Competition 2026</div>
+    <h1 class="header-title" id="mainTitle">ดาวน์โหลดใบประกาศนียบัตร</h1>
+    <p class="header-sub">Certificate Download System</p>
+  </div>
+
+</header>
 
   <!-- ════ FLOATING EVENT SELECTOR ════ -->
   <div class="selector-float">
@@ -776,23 +869,27 @@
   <!-- ════ CERTIFICATE PREVIEW OVERLAY ════ -->
   <div id="v1ImageModal" class="cert-preview-overlay" onclick="closeV1Preview()">
     <span class="preview-close-x" onclick="closeV1Preview()">&#x2715;</span>
+
     <div class="zoom-bar" onclick="event.stopPropagation()">
       <span class="zoom-icon">🔍</span>
       <input type="range" id="zoomSlider" min="0.2" max="1.2" step="0.05" value="0.5" oninput="updateImageZoom(this.value)">
       <span class="zoom-icon" id="zoomPct">50%</span>
     </div>
+
     <div class="cert-preview-wrap" onclick="event.stopPropagation()">
       <div class="cert-frame-wrap" id="v1ModalContent">
         <img id="v1ModalImage" class="cert-frame-img" src="" alt="Certificate">
         <div id="v1NameText" class="cert-overlay-name"></div>
         <div id="v1IdText" class="cert-overlay-id"></div>
       </div>
+
       <div class="preview-actions">
         <button class="btn-download" onclick="triggerPDFCompileV1()" id="btnDownloadPdf">📥 ดาวน์โหลดใบประกาศนียบัตร (PDF)</button>
         <button class="btn-close-preview" onclick="closeV1Preview()" id="btnClosePreview">ปิดหน้าต่าง</button>
       </div>
     </div>
   </div>
+
   <div id="v1HiddenRenderBox"></div>
 
   <!-- ════ FOOTER ════ -->
@@ -803,13 +900,17 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script>
     /* ════ CONFIG ════ */
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz4I9nmMXFlIKWfqEif2OaaMXhvUNPjeZr4N_sHffDivAYvmWN6ULM3y0hfI66uAI2e-w/exec";
+
+    const MAX_TEXT_WIDTH = 1000;
     let CERT_CONFIG = {
       name:   { bottomOffset: "48.2%", baseSize: 72 },
       certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
     };
+
     let allEventsRaw = [];
     let activeMemberContext = null;
     let globalActiveBase64 = "";
@@ -917,11 +1018,25 @@
     /* ════ HELPERS ════ */
     function t(key) { return T[currentLang][key] ?? key; }
     function tc(key) { return T[currentLang].certTypes[key] ?? key; }
-    function calcFontSize(text, base, threshold = 25) {
-      if (!text) return base;
-      const len = text.length;
-      return len > threshold ? Math.max(base * (threshold / len), base * 0.65) : base;
-    }
+    // ฟังก์ชันใหม่: วัดความกว้างและคำนวณขนาดฟอนต์ให้พอดีกรอบ
+function getFitFontSize(text, baseSize, maxWidth) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    
+    // ตั้งค่า font ให้ตรงกับ CSS (น้ำหนัก 700, ขนาด baseSize, ฟอนต์ Prompt)
+    ctx.font = `700 ${baseSize}px 'Prompt'`; 
+    
+    const metrics = ctx.measureText(text);
+    const textWidth = metrics.width;
+
+    // ถ้าความกว้างไม่เกิน maxWidth ให้ใช้ขนาดปกติ
+    if (textWidth <= maxWidth) {
+        return baseSize;
+    } 
+    
+    // ถ้าเกิน ให้คำนวณสัดส่วน (Ratio) เพื่อย่อขนาดลง
+    return Math.floor((maxWidth / textWidth) * baseSize);
+}
 
     /* ════ LANGUAGE TOGGLE ════ */
     function toggleLanguage() {
@@ -930,6 +1045,7 @@
       applyLangDOM();
       onEventChanged();
     }
+
     function applyLangDOM() {
       document.getElementById('mainTitle').innerText = t('title');
       document.getElementById('dropdownLabel').innerText = t('dropdownLabel');
@@ -974,6 +1090,7 @@
 
     /* ════ INIT ════ */
     document.addEventListener("DOMContentLoaded", initSystem);
+
     async function initSystem() {
       try {
         const vRes = await callServer('getVersion');
@@ -990,9 +1107,12 @@
       const selected = document.getElementById('eventSelect').value;
       document.getElementById('tablesMainContainer').innerHTML = '';
       if (!selected) return;
+
       Swal.fire({ title: t('loadingTitle'), text: t('loadingText'), allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
       const filtered = allEventsRaw.filter(e => e.eventName === selected);
       if (!filtered.length) { Swal.close(); return; }
+
       try {
         const tables = await callServer('getMultipleTeams', { compsList: filtered });
         tables.forEach(td => renderCompBlock(td));
@@ -1004,412 +1124,476 @@
 
     /* ════ RENDER COMPETITION BLOCK ════ */
     function renderCompBlock(tableData) {
-      const container = document.getElementById('tablesMainContainer');
-      const thdr = t('tableHeaders');
-      const section = document.createElement('div');
-      section.className = 'comp-section';
+  const container = document.getElementById('tablesMainContainer');
+  const thdr = t('tableHeaders');
+
+  const section = document.createElement('div');
+  section.className = 'comp-section';
+
+  // 🎨 1. ตรรกะเช็กชื่อรุ่นเพื่อเลือกสีเส้นคั่นและสีข้อความแบบไล่เฉด (Linear Gradient)
+  const compName = tableData.competitionName.toLowerCase();
+  let dividerGradient = 'linear-gradient(90deg, #cbd5e1, #94a3b8)'; // สีเทา (Fallback)
+
+  if (compName.includes('elementary')) {
+    // 🟢 สีเขียว (Emerald to Mint)
+    dividerGradient = 'linear-gradient(90deg, #008542 0%, #22c55e 100%)';
+  } else if (compName.includes('junior')) {
+    // 🔴 สีแดง (Crimson to Coral)
+    dividerGradient = 'linear-gradient(90deg, #e11d48 0%, #fb7185 100%)';
+  } else if (compName.includes('senior')) {
+    // 🔵 สีน้ำเงิน (Royal Blue to Sky Blue)
+    dividerGradient = 'linear-gradient(90deg, #1d4ed8 0%, #60a5fa 100%)';
+  }
+
+  section.innerHTML = `
+    <div class="comp-header" style="display: flex; align-items: center; gap: 18px; padding: 1.5rem 1.75rem 1.25rem 1.75rem;">
       
-      const compName = tableData.competitionName.toLowerCase();
-      let dividerGradient = 'linear-gradient(90deg, #cbd5e1, #94a3b8)'; 
-      if (compName.includes('elementary')) {
-        dividerGradient = 'linear-gradient(90deg, #008542 0%, #22c55e 100%)';
-      } else if (compName.includes('junior')) {
-        dividerGradient = 'linear-gradient(90deg, #e11d48 0%, #fb7185 100%)';
-      } else if (compName.includes('senior')) {
-        dividerGradient = 'linear-gradient(90deg, #1d4ed8 0%, #60a5fa 100%)';
-      }
+      <div class="comp-icon" style="font-size: 3.2rem; line-height: 1;">🤖</div>
       
-      section.innerHTML = `
-        <div class="comp-header" style="display: flex; align-items: center; gap: 18px; padding: 1.5rem 1.75rem 1.25rem 1.75rem;">
-          <div class="comp-icon" style="font-size: 3.2rem; line-height: 1;">🤖</div>
-          <div>
-            <div class="comp-category-label" style="margin-bottom: 2px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8;">
-              ${t('category')}
-            </div>
-            <div class="comp-title" style="font-size: clamp(2.0rem, 5vw, 3.0rem); font-weight: 900; background: ${dividerGradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; width: fit-content; line-height: 1.05; letter-spacing: -0.03em;">
-              ${tableData.competitionName}
-            </div>
-          </div>
+      <div>
+        <div class="comp-category-label" style="margin-bottom: 2px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b;">
+          ${t('category')}
         </div>
         
-        <div class="comp-divider" style="height: 4px; background: ${dividerGradient}; border-radius: 99px; margin: 16px auto 20px auto; width: 94%;"></div>
-        
-        <div style="overflow-x: auto;">
-          <table class="data-table" id="tbl-${tableData.competitionName.replace(/\s+/g,'_')}">
-            <thead>
-              <tr>
-                <th style="width:72px;">${thdr[0]}</th>
-                <th style="width:90px;">${thdr[1]}</th>
-                <th>${thdr[2]}</th>
-                <th>${thdr[3]}</th>
-              </tr>
-            </thead>
-            <tbody id="tbody-${tableData.competitionName.replace(/\s+/g,'_')}"></tbody>
-          </table>
+        <div class="comp-title" style="font-size: clamp(2.0rem, 5vw, 3.0rem); font-weight: 900; background: ${dividerGradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; width: fit-content; line-height: 1.05; letter-spacing: -0.03em;">
+          ${tableData.competitionName}
         </div>
-      `;
-      container.appendChild(section);
-      
-      const tbody = document.getElementById(`tbody-${tableData.competitionName.replace(/\s+/g,'_')}`);
-      if (!tableData.teams.length) {
-        tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-msg">${t('emptyTeams')}</div></div></td></tr>`;
-        return;
-      }
-      
-      tableData.teams.forEach((team, idx) => {
-        const uid = `det-${tableData.competitionName.replace(/\s+/g,'')}-${idx}`;
-        const rankNum = parseInt(team.rank);
-        const rankClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : '';
-        const trMain = document.createElement('tr');
-        trMain.innerHTML = `
-          <td><span class="rank-chip ${rankClass}">${team.rank}</span></td>
-          <td style="font-size:1.1rem;">${team.medal}</td>
-          <td><div class="team-name-cell" title="${team.teamName}">${team.teamName}</div></td>
-          <td><div class="inst-cell" title="${team.institution}">${team.institution}</div></td>
-        `;
-        const trDetail = document.createElement('tr');
-        trDetail.id = uid;
-        trDetail.className = 'detail-row';
-        trDetail.innerHTML = `<td colspan="4"><div class="detail-inner"><div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-weight:600;">${t('loadingDetails')}</div></div></td>`;
-        trMain.onclick = () => toggleDetail(trMain, trDetail, team, tableData);
-        tbody.appendChild(trMain);
-        tbody.appendChild(trDetail);
-      });
-    }
+        
+      </div>
+    </div>
+    
+    <div class="comp-divider" style="height: 8px; background: ${dividerGradient}; border-radius: 99px; margin: 16px auto 20px auto; width: 94%;"></div>
+    
+    <div style="overflow-x: auto;">
+      <table class="data-table" id="tbl-${tableData.competitionName.replace(/\s+/g,'_')}">
+        <thead>
+          <tr>
+            <th style="width:72px;">${thdr[0]}</th>
+            <th style="width:90px;">${thdr[1]}</th>
+            <th>${thdr[2]}</th>
+            <th>${thdr[3]}</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-${tableData.competitionName.replace(/\s+/g,'_')}"></tbody>
+      </table>
+    </div>
+  `;
+
+  container.appendChild(section);
+
+  const tbody = document.getElementById(`tbody-${tableData.competitionName.replace(/\s+/g,'_')}`);
+
+  if (!tableData.teams.length) {
+    tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-msg">${t('emptyTeams')}</div></div></td></tr>`;
+    return;
+  }
+
+  tableData.teams.forEach((team, idx) => {
+    const uid = `det-${tableData.competitionName.replace(/\s+/g,'')}-${idx}`;
+    const rankNum = parseInt(team.rank);
+    const rankClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : '';
+
+    const trMain = document.createElement('tr');
+    trMain.innerHTML = `
+      <td><span class="rank-chip ${rankClass}">${team.rank}</span></td>
+      <td style="font-size:1.1rem;">${team.medal}</td>
+      <td><div class="team-name-cell" title="${team.teamName}">${team.teamName}</div></td>
+      <td><div class="inst-cell" title="${team.institution}">${team.institution}</div></td>
+    `;
+
+    const trDetail = document.createElement('tr');
+    trDetail.id = uid;
+    trDetail.className = 'detail-row';
+    trDetail.innerHTML = `<td colspan="4"><div class="detail-inner"><div style="text-align:center;padding:1.5rem;color:var(--text-faint);font-weight:600;">${t('loadingDetails')}</div></div></td>`;
+
+    trMain.onclick = () => toggleDetail(trMain, trDetail, team, tableData);
+    tbody.appendChild(trMain);
+    tbody.appendChild(trDetail);
+  });
+}
 
     /* ════ ACCORDION TOGGLE ════ */
     async function toggleDetail(trMain, trDetail, team, tableData) {
-      const isShowing = trDetail.classList.contains('show-detail');
-      document.querySelectorAll('.detail-row').forEach(r => r.classList.remove('show-detail'));
-      document.querySelectorAll('.data-table tbody tr').forEach(r => r.classList.remove('row-active'));
-      if (isShowing) return;
-      trDetail.classList.add('show-detail');
-      trMain.classList.add('row-active');
-      const innerBox = trDetail.querySelector('.detail-inner');
-      try {
-        const details = await callServer('getTeamDetails', {
-          detailFileId: tableData.detailFileId,
-          detailSheetName: tableData.detailSheetName,
-          teamId: team.teamId
-        });
-        const rawMedal = team.medal.toString().trim();
-        const rankNum = parseInt(team.rank);
-        let medalText = '';
-        if (currentLang === 'th') {
-          if (rawMedal.includes('🥇') || /gold|ทอง/i.test(rawMedal)) medalText = 'ทอง';
-          else if (rawMedal.includes('🥈') || /silver|เงิน/i.test(rawMedal)) medalText = 'เงิน';
-          else if (rawMedal.includes('🥉') || /bronze|ทองแดง/i.test(rawMedal)) medalText = 'ทองแดง';
-          else if (rawMedal !== '' && rawMedal !== '-') medalText = rawMedal;
-        } else {
-          if (rawMedal.includes('🥇') || /gold|ทอง/i.test(rawMedal)) medalText = 'Gold';
-          else if (rawMedal.includes('🥈') || /silver|เงิน/i.test(rawMedal)) medalText = 'Silver';
-          else if (rawMedal.includes('🥉') || /bronze|ทองแดง/i.test(rawMedal)) medalText = 'Bronze';
-          else if (rawMedal !== '' && rawMedal !== '-') medalText = rawMedal;
-        }
-        
-        const hasStar = team.teamName && (team.teamName.includes('⭐') || team.teamName.includes('(⭐)'));
-        const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
-        const isRookie = hasStar || isRookieMedal;
-        
-        let rankBadge = '';
-        if (rankNum === 1) rankBadge = `<div class="award-pill rank-pill">🥇 ${currentLang === 'th' ? 'รางวัลชนะเลิศ' : 'Winner'}</div>`;
-        else if (rankNum === 2) rankBadge = `<div class="award-pill rank-pill">🥈 ${currentLang === 'th' ? 'รองชนะเลิศอันดับ 1' : '1st Runner-up'}</div>`;
-        else if (rankNum === 3) rankBadge = `<div class="award-pill rank-pill">🥉 ${currentLang === 'th' ? 'รองชนะเลิศอันดับ 2' : '2nd Runner-up'}</div>`;
-        else if (rankNum >= 4 && rankNum <= 10) {
-          rankBadge = `<div class="award-pill rank-pill"> ${currentLang === 'th' ? `อันดับที่ ${rankNum}` : `${rankNum}th place`}</div>`;
-        }
-        
-        const medalBadge = medalText ? `<div class="award-pill medal-pill">🏅 ${currentLang === 'th' ? 'ประกาศนียบัตรเหรียญ' : 'Medal Certificate: '}${medalText}</div>` : '';
-        const rookieBadge = isRookie ? `<div class="award-pill rookie-pill">⭐ ${currentLang === 'th' ? 'Rookie Award' : 'Rookie Award'}</div>` : '';
-        const safe = s => (s || '').toString().replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        
-        const sH = safe(tableData.pdfUrl); const sI = safe(tableData.pdfUrlColI);
-        const sJ = safe(tableData.pdfUrlColJ); const sK = safe(tableData.pdfUrlColK);
-        const sL = safe(tableData.pdfUrlColL); const sM = safe(tableData.pdfUrlColM);
-        const sN = safe(tableData.pdfUrlColN);
-        
-        const sO = safe(tableData.pdfUrlColO || ''); 
-        const sP = safe(tableData.pdfUrlColP || ''); 
-        const sQ = safe(tableData.pdfUrlColQ || ''); 
-        const sR = safe(tableData.pdfUrlColR || ''); 
-        const sS = safe(tableData.pdfUrlColS || ''); 
-        const sT = safe(tableData.pdfUrlColT || ''); 
-        const sU = safe(tableData.pdfUrlColU || ''); 
-        const sV = safe(tableData.pdfUrlColV || ''); 
-        const sCoach = safe(details.coach); const sM1 = safe(details.member1);
-        const sM2 = safe(details.member2); const sM3 = safe(details.member3);
-        const sTeam = safe(team.teamName); const sInst = safe(team.institution);
-        const sRaw = safe(rawMedal);
-        
-        const buildCard = (roleKey, personSafe, roleLabel) => `
-          <div class="member-card" onclick="onMemberCardClicked('${roleKey}','${personSafe}','${safe(team.teamId.toString())}','${sTeam}','${sInst}',${rankNum},'${sRaw}','${sH}','${sI}','${sJ}','${sK}','${sL}','${sM}','${sN}','${sO}','${sP}','${sQ}','${sR}','${sS}','${sT}','${sU}','${sV}','${safe(roleLabel)}')">
-            <div class="member-role">${roleLabel}</div>
-            <div class="member-name" title="${personSafe}">${personSafe || '-'}</div>
-            <div class="member-action-hint">${t('actionHint')}</div>
-          </div>`;
-          
-        const coachLabel = t('coachRole');
-        const memberLabel = t('memberRole');
-        
-        innerBox.innerHTML = `
-          <div class="award-row">${rankBadge}${medalBadge}${rookieBadge}</div>
-          <div class="detail-panels">
-            <div class="detail-panel">
-              <div class="panel-label">${t('infoTitle')}</div>
-              <div class="info-row"><span class="info-key">Team ID:</span><span class="info-val">${team.teamId}</span></div>
-              <div class="info-row"><span class="info-key">${t('teamName')}:</span><span class="info-val">${team.teamName}</span></div>
-              <div class="info-row"><span class="info-key">${t('institution')}:</span><span class="info-val">${team.institution}</span></div>
-              <div class="info-row"><span class="info-key">${currentLang === 'th' ? 'จังหวัด' : 'Province'}:</span><span class="info-val">${details.province || '-'}</span></div>
-            </div>
-            <div class="detail-panel">
-              <div class="panel-label">${t('scoreTitle')}</div>
-              <div class="score-stack">
-                <div class="score-item"><span class="score-key">${tableData.scoreLabels.label1}</span><span class="score-val">${team.score1}</span></div>
-                <div class="score-item"><span class="score-key">${tableData.scoreLabels.label2}</span><span class="score-val">${team.score2}</span></div>
-                <div class="score-item"><span class="score-key">${tableData.scoreLabels.label3}</span><span class="score-val">${team.score3}</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="member-section-label">${t('memberTitle')}</div>
-          <div class="member-grid">
-            ${buildCard('coach', sCoach, coachLabel)}
-            ${buildCard('member1', sM1, memberLabel + ' 1')}
-            ${buildCard('member2', sM2, memberLabel + ' 2')}
-            ${buildCard('member3', sM3, memberLabel + ' 3')}
-          </div>
-        `;
-      } catch (err) {
-        innerBox.innerHTML = `<div style="color:var(--teal-400);text-align:center;padding:1rem;font-weight:600;">Error: ${err.message}</div>`;
-      }
+  const isShowing = trDetail.classList.contains('show-detail');
+  document.querySelectorAll('.detail-row').forEach(r => r.classList.remove('show-detail'));
+  document.querySelectorAll('.data-table tbody tr').forEach(r => r.classList.remove('row-active'));
+
+  if (isShowing) return;
+
+  trDetail.classList.add('show-detail');
+  trMain.classList.add('row-active');
+
+  const innerBox = trDetail.querySelector('.detail-inner');
+
+  try {
+    const details = await callServer('getTeamDetails', {
+      detailFileId: tableData.detailFileId,
+      detailSheetName: tableData.detailSheetName,
+      teamId: team.teamId
+    });
+
+    const rawMedal = team.medal.toString().trim();
+    const rankNum = parseInt(team.rank);
+    let medalText = '';
+    if (currentLang === 'th') {
+      if (rawMedal.includes('🥇') || /gold|ทอง/i.test(rawMedal)) medalText = 'ทอง';
+      else if (rawMedal.includes('🥈') || /silver|เงิน/i.test(rawMedal)) medalText = 'เงิน';
+      else if (rawMedal.includes('🥉') || /bronze|ทองแดง/i.test(rawMedal)) medalText = 'ทองแดง';
+      else if (rawMedal !== '' && rawMedal !== '-') medalText = rawMedal;
+    } else {
+      if (rawMedal.includes('🥇') || /gold|ทอง/i.test(rawMedal)) medalText = 'Gold';
+      else if (rawMedal.includes('🥈') || /silver|เงิน/i.test(rawMedal)) medalText = 'Silver';
+      else if (rawMedal.includes('🥉') || /bronze|ทองแดง/i.test(rawMedal)) medalText = 'Bronze';
+      else if (rawMedal !== '' && rawMedal !== '-') medalText = rawMedal;
     }
+
+    // 🔰 [เพิ่ม] เช็กความเป็น Rookie จาก Logic เดียวกับหลังบ้าน (ชื่อทีมมีดาว หรือ ช่องเหรียญมีคำว่า Rookie)
+    const hasStar = team.teamName && (team.teamName.includes('⭐') || team.teamName.includes('(⭐)'));
+    const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
+    const isRookie = hasStar || isRookieMedal;
+
+    // 🏆 [ปรับปรุง] ยุบรวมเงื่อนไขอันดับ 4-10 ให้สั้นกระชับขึ้น
+    let rankBadge = '';
+    if (rankNum === 1) rankBadge = `<div class="award-pill rank-pill">🥇 ${currentLang === 'th' ? 'รางวัลชนะเลิศ' : 'Winner'}</div>`;
+    else if (rankNum === 2) rankBadge = `<div class="award-pill rank-pill">🥈 ${currentLang === 'th' ? 'รองชนะเลิศอันดับ 1' : '1st Runner-up'}</div>`;
+    else if (rankNum === 3) rankBadge = `<div class="award-pill rank-pill">🥉 ${currentLang === 'th' ? 'รองชนะเลิศอันดับ 2' : '2nd Runner-up'}</div>`;
+    else if (rankNum >= 4 && rankNum <= 10) {
+      rankBadge = `<div class="award-pill rank-pill"> ${currentLang === 'th' ? `อันดับที่ ${rankNum}` : `${rankNum}th place`}</div>`;
+    }
+    
+    const medalBadge = medalText ? `<div class="award-pill medal-pill">🏅 ${currentLang === 'th' ? 'ประกาศนียบัตรเหรียญ' : 'Medal Certificate: '}${medalText}</div>` : '';
+    
+    // 🔰 [เพิ่ม] สร้าง Badge สำหรับ Rookie Award
+    const rookieBadge = isRookie ? `<div class="award-pill rookie-pill">⭐ ${currentLang === 'th' ? 'Rookie Award' : 'Rookie Award'}</div>` : '';
+
+    const safe = s => (s || '').toString().replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    
+    const sH = safe(tableData.pdfUrl); const sI = safe(tableData.pdfUrlColI);
+    const sJ = safe(tableData.pdfUrlColJ); const sK = safe(tableData.pdfUrlColK);
+    const sL = safe(tableData.pdfUrlColL); const sM = safe(tableData.pdfUrlColM);
+    const sN = safe(tableData.pdfUrlColN);
+    
+    const sO = safe(tableData.pdfUrlColO || ''); // อันดับ 4
+    const sP = safe(tableData.pdfUrlColP || ''); // อันดับ 5
+    const sQ = safe(tableData.pdfUrlColQ || ''); // อันดับ 6
+    const sR = safe(tableData.pdfUrlColR || ''); // อันดับ 7
+    const sS = safe(tableData.pdfUrlColS || ''); // อันดับ 8
+    const sT = safe(tableData.pdfUrlColT || ''); // อันดับ 9
+    const sU = safe(tableData.pdfUrlColU || ''); // อันดับ 10
+    const sV = safe(tableData.pdfUrlColV || ''); // Rookie Award
+
+    const sCoach = safe(details.coach); const sM1 = safe(details.member1);
+    const sM2 = safe(details.member2); const sM3 = safe(details.member3);
+    const sTeam = safe(team.teamName); const sInst = safe(team.institution);
+    const sRaw = safe(rawMedal);
+
+    const buildCard = (roleKey, personSafe, roleLabel) => `
+      <div class="member-card" onclick="onMemberCardClicked('${roleKey}','${personSafe}','${safe(team.teamId.toString())}','${sTeam}','${sInst}',${rankNum},'${sRaw}','${sH}','${sI}','${sJ}','${sK}','${sL}','${sM}','${sN}','${sO}','${sP}','${sQ}','${sR}','${sS}','${sT}','${sU}','${sV}','${safe(roleLabel)}')">
+        <div class="member-role">${roleLabel}</div>
+        <div class="member-name" title="${personSafe}">${personSafe || '-'}</div>
+        <div class="member-action-hint">${t('actionHint')}</div>
+      </div>`;
+
+    const coachLabel = t('coachRole');
+    const memberLabel = t('memberRole');
+
+    // 📌 [แก้ไข] เพิ่มข้อมูล Province ต่อจากแถวสถาบัน (Institution)
+    innerBox.innerHTML = `
+      <div class="award-row">${rankBadge}${medalBadge}${rookieBadge}</div>
+
+      <div class="detail-panels">
+        <div class="detail-panel">
+          <div class="panel-label">${t('infoTitle')}</div>
+          <div class="info-row"><span class="info-key">Team ID:</span><span class="info-val">${team.teamId}</span></div>
+          <div class="info-row"><span class="info-key">${t('teamName')}:</span><span class="info-val">${team.teamName}</span></div>
+          <div class="info-row"><span class="info-key">${t('institution')}:</span><span class="info-val">${team.institution}</span></div>
+          <div class="info-row"><span class="info-key">${currentLang === 'th' ? 'จังหวัด' : 'Province'}:</span><span class="info-val">${details.province || '-'}</span></div>
+        </div>
+        <div class="detail-panel">
+          <div class="panel-label">${t('scoreTitle')}</div>
+          <div class="score-stack">
+            <div class="score-item"><span class="score-key">${tableData.scoreLabels.label1}</span><span class="score-val">${team.score1}</span></div>
+            <div class="score-item"><span class="score-key">${tableData.scoreLabels.label2}</span><span class="score-val">${team.score2}</span></div>
+            <div class="score-item"><span class="score-key">${tableData.scoreLabels.label3}</span><span class="score-val">${team.score3}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="member-section-label">${t('memberTitle')}</div>
+      <div class="member-grid">
+        ${buildCard('coach', sCoach, coachLabel)}
+        ${buildCard('member1', sM1, memberLabel + ' 1')}
+        ${buildCard('member2', sM2, memberLabel + ' 2')}
+        ${buildCard('member3', sM3, memberLabel + ' 3')}
+      </div>
+    `;
+  } catch (err) {
+    innerBox.innerHTML = `<div style="color:var(--teal-700);text-align:center;padding:1rem;font-weight:600;">Error: ${err.message}</div>`;
+  }
+}
 
     /* ════ MEMBER CARD CLICK ════ */
     async function onMemberCardClicked(roleType, personName, teamId, teamName, institution, rankNum, rawMedal, urlH, urlI, urlJ, urlK, urlL, urlM, urlN, urlO, urlP, urlQ, urlR, urlS, urlT, urlU, urlV, roleLabel) {
-      if (!personName || personName.trim() === '' || personName.trim() === '-') {
-        Swal.fire({ title: t('noMember'), text: t('noMemberText'), icon: 'warning' });
-        return;
-      }
-      Swal.fire({ title: currentLang === 'th' ? 'กำลังตรวจสอบ...' : 'Verifying...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-      
-      activeMemberContext = { 
-        roleType, personName, teamId, teamName, institution, rankNum: parseInt(rankNum) || 0, rawMedal, 
-        urlColH: urlH, urlColI: urlI, urlColJ: urlJ, urlColK: urlK, urlColL: urlL, urlColM: urlM, urlColN: urlN, 
-        urlColO: urlO, urlColP: urlP, urlColQ: urlQ, urlColR: urlR, urlColS: urlS, urlColT: urlT, urlColU: urlU, urlColV: urlV,
-        roleLabel, certificateId: '' 
-      };
-      
-      try {
-        currentCertIdsMap = await checkExistingCertIds(teamId, personName, activeMemberContext.rankNum, rawMedal, teamName);
-        Swal.close();
-        renderCertMenu(personName, activeMemberContext.rankNum, rawMedal, roleLabel, currentCertIdsMap);
-      } catch (err) {
-        Swal.close();
-        Swal.fire('Error', t('errCheckId') + err.message, 'error');
-      }
-    }
+  if (!personName || personName.trim() === '' || personName.trim() === '-') {
+    Swal.fire({ title: t('noMember'), text: t('noMemberText'), icon: 'warning' });
+    return;
+  }
+  Swal.fire({ title: currentLang === 'th' ? 'กำลังตรวจสอบ...' : 'Verifying...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+  
+  // บันทึก URL ทุกคอลัมน์ลง Context เพื่อให้ฟังก์ชันอื่นดึงไปใช้ได้ง่ายขึ้น
+  activeMemberContext = { 
+    roleType, personName, teamId, teamName, institution, rankNum: parseInt(rankNum) || 0, rawMedal, 
+    urlColH: urlH, urlColI: urlI, urlColJ: urlJ, urlColK: urlK, urlColL: urlL, urlColM: urlM, urlColN: urlN, 
+    urlColO: urlO, urlColP: urlP, urlColQ: urlQ, urlColR: urlR, urlColS: urlS, urlColT: urlT, urlColU: urlU, urlColV: urlV,
+    roleLabel, certificateId: '' 
+  };
+  
+  try {
+    // ส่งข้อมูลไปตรวจสอบ ID เก่าในระบบล่วงหน้า
+    currentCertIdsMap = await checkExistingCertIds(teamId, personName, activeMemberContext.rankNum, rawMedal, teamName);
+    Swal.close();
+    renderCertMenu(personName, activeMemberContext.rankNum, rawMedal, roleLabel, currentCertIdsMap);
+  } catch (err) {
+    Swal.close();
+    Swal.fire('Error', t('errCheckId') + err.message, 'error');
+  }
+}
 
-    function mkBtn(emoji, bgColor, title, certId, url, certType) {
-      return `
-        <button class="btn w-100 my-2 p-3 text-start d-flex align-items-center justify-content-between" 
-                style="background-color: ${bgColor}; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; color: #1e293b; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02);"
-                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'; var b=this.querySelector('.preview-badge'); if(b){b.style.background='#008542'; b.style.color='#fff';}"
-                onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.02)'; var b=this.querySelector('.preview-badge'); if(b){b.style.background='rgba(0, 133, 66, 0.08)'; b.style.color='#008542';}"
-                onclick="processCertGenAndPreview('${url}', '${activeMemberContext.personName.replace(/'/g, "\\'")}', '${certType}', '${activeMemberContext.roleLabel}')">
-          <div class="d-flex align-items-center">
-            <span style="font-size: 1.4rem; margin-right: 12px; display: inline-block; vertical-align: middle;">${emoji}</span>
-            <div>
-              <div style="font-weight: 600; font-size: 0.95rem; color: #0f172a;">${title}</div>
-              <div style="font-size: 0.8rem; color: #64748b; margin-top: 2px; font-family: monospace;">ID: ${certId}</div>
-            </div>
-          </div>
-          <span class="preview-badge" 
-                style="font-size: 0.78rem; font-weight: 700; color: #008542; background-color: rgba(0, 133, 66, 0.08); padding: 5px 14px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; transition: all 0.2s;">
-            Preview
-          </span>
-        </button>
-      `;
-    }
+// ฟังก์ชันสร้างโครงสร้างปุ่มเลือกประเภทประกาศนียบัตรภายใน Swal
+function mkBtn(emoji, bgColor, title, certId, url, certType) {
+  return `
+    <button class="btn w-100 my-2 p-3 text-start d-flex align-items-center justify-content-between" 
+            style="background-color: ${bgColor}; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; color: #1e293b; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02);"
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'; var b=this.querySelector('.preview-badge'); if(b){b.style.background='#008542'; b.style.color='#fff';}"
+            onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.02)'; var b=this.querySelector('.preview-badge'); if(b){b.style.background='rgba(0, 133, 66, 0.08)'; b.style.color='#008542';}"
+            onclick="processCertGenAndPreview('${url}', '${activeMemberContext.personName.replace(/'/g, "\\'")}', '${certType}', '${activeMemberContext.roleLabel}')">
+      
+      <div class="d-flex align-items-center">
+        <span style="font-size: 1.4rem; margin-right: 12px; display: inline-block; vertical-align: middle;">${emoji}</span>
+        <div>
+          <div style="font-weight: 600; font-size: 0.95rem; color: #0f172a;">${title}</div>
+          <div style="font-size: 0.8rem; color: #64748b; margin-top: 2px; font-family: monospace;">ID: ${certId}</div>
+        </div>
+      </div>
+      
+      <span class="preview-badge" 
+            style="font-size: 0.78rem; font-weight: 700; color: #008542; background-color: rgba(0, 133, 66, 0.08); padding: 5px 14px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; transition: all 0.2s;">
+        Preview
+      </span>
+
+    </button>
+  `;
+}
 
     /* ════ CHECK IDs ════ */
     async function checkExistingCertIds(teamId, personName, rankNum, rawMedal, teamName) {
-      const map = { rankCertId: '', medalCertId: '', joinCertId: '', rookieCertId: '' };
-      try {
-        if (rankNum >= 1 && rankNum <= 10) {
-          map.rankCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '1' })).certificateId;
-        }
-        if (rawMedal && rawMedal !== '' && rawMedal !== '-') {
-          map.medalCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '2' })).certificateId;
-        }
-        map.joinCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '3' })).certificateId;
-        
-        const hasStar = teamName && (teamName.includes('⭐') || teamName.includes('(⭐)'));
-        const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
-        if (hasStar || isRookieMedal) {
-          map.rookieCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '4' })).certificateId;
-        }
-      } catch (e) { console.log("Pre-fetch IDs error:", e); }
-      return map;
+  const map = { rankCertId: '', medalCertId: '', joinCertId: '', rookieCertId: '' };
+  try {
+    // 🏆 อันดับ 1 ถึงอันดับ 10 ใช้รหัสประเภท '1'
+    if (rankNum >= 1 && rankNum <= 10) {
+      map.rankCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '1' })).certificateId;
     }
+    // 🏅 เหรียญรางวัล ใช้รหัสประเภท '2'
+    if (rawMedal && rawMedal !== '' && rawMedal !== '-') {
+      map.medalCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '2' })).certificateId;
+    }
+    // 📜 เข้าร่วม ใช้รหัสประเภท '3'
+    map.joinCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '3' })).certificateId;
+    
+    // ⭐ Rookie Award เช็กจากชื่อทีมมีดาว หรือคำว่า Rookie ในช่องเหรียญ ใช้รหัสประเภท '4'
+    const hasStar = teamName && (teamName.includes('⭐') || teamName.includes('(⭐)'));
+    const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
+    if (hasStar || isRookieMedal) {
+      map.rookieCertId = (await callServer('getOrCreateCertId', { teamId, personName, roleType: activeMemberContext.roleType, certType: '4' })).certificateId;
+    }
+  } catch (e) { console.log("Pre-fetch IDs error:", e); }
+  return map;
+}
 
     /* ════ CERT MENU ════ */
     function renderCertMenu(personName, rankNum, rawMedal, roleLabel, idsMap) {
-      let btns = '';
-      const autoId = t('autoId');
-      const ctx = activeMemberContext;
-      
-      if (rankNum >= 1 && rankNum <= 10) {
-        let rankUrl = '';
-        let rankTitle = '';
-        
-        if (rankNum === 1) { rankUrl = ctx.urlColI; rankTitle = currentLang === 'th' ? 'รางวัลชนะเลิศ' : 'Winner'; }
-        else if (rankNum === 2) { rankUrl = ctx.urlColJ; rankTitle = currentLang === 'th' ? 'รองชนะเลิศอันดับ 1' : '1st Runner-up'; }
-        else if (rankNum === 3) { rankUrl = ctx.urlColK; rankTitle = currentLang === 'th' ? 'รองชนะเลิศอันดับ 2' : '2nd Runner-up'; }
-        else if (rankNum === 4) { rankUrl = ctx.urlColO; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 4' : 'Rank 4'; }
-        else if (rankNum === 5) { rankUrl = ctx.urlColP; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 5' : 'Rank 5'; }
-        else if (rankNum === 6) { rankUrl = ctx.urlColQ; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 6' : 'Rank 6'; }
-        else if (rankNum === 7) { rankUrl = ctx.urlColR; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 7' : 'Rank 7'; }
-        else if (rankNum === 8) { rankUrl = ctx.urlColS; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 8' : 'Rank 8'; }
-        else if (rankNum === 9) { rankUrl = ctx.urlColT; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 9' : 'Rank 9'; }
-        else if (rankNum === 10) { rankUrl = ctx.urlColU; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 10' : 'Rank 10'; }
-        if (rankUrl && rankUrl.trim() !== '' && rankUrl !== '-') {
-          btns += mkBtn(' 🏆 ', '#FFF9C4', rankTitle, idsMap.rankCertId || autoId, rankUrl, '1');
-        }
-      }
-      
-      if (rawMedal && rawMedal !== '' && rawMedal !== '-') {
-        let medalUrl = '';
-        let medalTitle = '';
-        const lm = rawMedal.toLowerCase();
-        
-        if (/🥇|gold|ทอง/.test(lm)) { medalUrl = ctx.urlColL; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญทอง' : 'Gold Medal'); } 
-        else if (/🥈|silver|เงิน/.test(lm)) { medalUrl = ctx.urlColM; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญเงิน' : 'Silver Medal'); } 
-        else if (/🥉|bronze|ทองแดง/.test(lm)) { medalUrl = ctx.urlColN; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญทองแดง' : 'Bronze Medal'); } 
-        
-        if (medalUrl && medalUrl.trim() !== '' && medalUrl !== '-') {
-          btns += mkBtn(' 🏅 ', '#F3E8FF', medalTitle, idsMap.medalCertId || autoId, medalUrl, '2');
-        }
-      }
-      
-      const hasStar = ctx.teamName && (ctx.teamName.includes('⭐') || ctx.teamName.includes('(⭐)'));
-      const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
-      if ((hasStar || isRookieMedal) && ctx.urlColV && ctx.urlColV.trim() !== '' && ctx.urlColV !== '-') {
-        btns += mkBtn(' 🚀 ', '#E0F7FA', 'Rookie Award', idsMap.rookieCertId || autoId, ctx.urlColV, '4');
-      }
-      
-      if (ctx.urlColH && ctx.urlColH.trim() !== '' && ctx.urlColH !== '-') {
-        btns += mkBtn(' 📜 ', '#E8F5E9', (currentLang === 'th' ? 'ประกาศนียบัตรเข้าร่วมฯ' : 'Participation'), idsMap.joinCertId || autoId, ctx.urlColH, '3');
-      }
-      
-      Swal.fire({
-        title: currentLang === 'th' ? 'เลือกใบประกาศนียบัตร' : 'Select Certificate',
-        html: `<div style="font-size:0.9rem;color:#666;margin-bottom:4px;">${currentLang === 'th' ? 'รายชื่อ:' : 'Name:'} <strong style="color:#052e27;font-size:1.05rem;">${personName}</strong></div><div class="cert-btn-list">${btns}</div>`,
-        showConfirmButton: false,
-        showCloseButton: true,
-        width: '580px'
-      });
+  let btns = '';
+  const autoId = t('autoId');
+  const ctx = activeMemberContext;
+
+  // 1. ตรรกะจัดการแสดงปุ่มอันดับ 1-10 -> ส่ง certType = '1'
+  if (rankNum >= 1 && rankNum <= 10) {
+    let rankUrl = '';
+    let rankTitle = '';
+    
+    if (rankNum === 1) { rankUrl = ctx.urlColI; rankTitle = currentLang === 'th' ? 'รางวัลชนะเลิศ' : 'Winner'; }
+    else if (rankNum === 2) { rankUrl = ctx.urlColJ; rankTitle = currentLang === 'th' ? 'รองชนะเลิศอันดับ 1' : '1st Runner-up'; }
+    else if (rankNum === 3) { rankUrl = ctx.urlColK; rankTitle = currentLang === 'th' ? 'รองชนะเลิศอันดับ 2' : '2nd Runner-up'; }
+    else if (rankNum === 4) { rankUrl = ctx.urlColO; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 4' : 'Rank 4'; }
+    else if (rankNum === 5) { rankUrl = ctx.urlColP; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 5' : 'Rank 5'; }
+    else if (rankNum === 6) { rankUrl = ctx.urlColQ; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 6' : 'Rank 6'; }
+    else if (rankNum === 7) { rankUrl = ctx.urlColR; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 7' : 'Rank 7'; }
+    else if (rankNum === 8) { rankUrl = ctx.urlColS; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 8' : 'Rank 8'; }
+    else if (rankNum === 9) { rankUrl = ctx.urlColT; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 9' : 'Rank 9'; }
+    else if (rankNum === 10) { rankUrl = ctx.urlColU; rankTitle = currentLang === 'th' ? 'รางวัลอันดับที่ 10' : 'Rank 10'; }
+
+    if (rankUrl && rankUrl.trim() !== '' && rankUrl !== '-') {
+      btns += mkBtn(' 🏆 ', '#FFF9C4', rankTitle, idsMap.rankCertId || autoId, rankUrl, '1');
     }
+  }
+
+  // 2. ปุ่มเหรียญรางวัล (ทอง, เงิน, ทองแดง) -> ส่ง certType = '2'
+  if (rawMedal && rawMedal !== '' && rawMedal !== '-') {
+    let medalUrl = '';
+    let medalTitle = '';
+    const lm = rawMedal.toLowerCase();
+    
+    if (/🥇|gold|ทอง/.test(lm)) { medalUrl = ctx.urlColL; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญทอง' : 'Gold Medal'); } 
+    else if (/🥈|silver|เงิน/.test(lm)) { medalUrl = ctx.urlColM; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญเงิน' : 'Silver Medal'); } 
+    else if (/🥉|bronze|ทองแดง/.test(lm)) { medalUrl = ctx.urlColN; medalTitle = (currentLang === 'th' ? 'ประกาศนียบัตรเหรียญทองแดง' : 'Bronze Medal'); } 
+    
+    if (medalUrl && medalUrl.trim() !== '' && medalUrl !== '-') {
+      btns += mkBtn(' 🏅 ', '#F3E8FF', medalTitle, idsMap.medalCertId || autoId, medalUrl, '2');
+    }
+  }
+
+  // 3. ปุ่ม Rookie Award -> ส่ง certType = '4'
+  const hasStar = ctx.teamName && (ctx.teamName.includes('⭐') || ctx.teamName.includes('(⭐)'));
+  const isRookieMedal = rawMedal && rawMedal.toLowerCase().includes('rookie');
+  if ((hasStar || isRookieMedal) && ctx.urlColV && ctx.urlColV.trim() !== '' && ctx.urlColV !== '-') {
+    btns += mkBtn(' 🚀 ', '#E0F7FA', 'Rookie Award', idsMap.rookieCertId || autoId, ctx.urlColV, '4');
+  }
+
+  // 4. ปุ่มเข้าร่วมแข่งขันทั่วไป -> ส่ง certType = '3'
+  if (ctx.urlColH && ctx.urlColH.trim() !== '' && ctx.urlColH !== '-') {
+    btns += mkBtn(' 📜 ', '#E8F5E9', (currentLang === 'th' ? 'ประกาศนียบัตรเข้าร่วมฯ' : 'Participation'), idsMap.joinCertId || autoId, ctx.urlColH, '3');
+  }
+
+  Swal.fire({
+    title: currentLang === 'th' ? 'เลือกใบประกาศนียบัตร' : 'Select Certificate',
+    html: `<div style="font-size:0.9rem;color:#666;margin-bottom:4px;">${currentLang === 'th' ? 'รายชื่อ:' : 'Name:'} <strong style="color:#052e27;font-size:1.05rem;">${personName}</strong></div><div class="cert-btn-list">${btns}</div>`,
+    showConfirmButton: false,
+    showCloseButton: true,
+    width: '580px'
+  });
+}
 
     /* ════ PROCESS CERT ════ */
     async function processCertGenAndPreview(imageUrl, personName, certType, roleLabel) {
-      if (!imageUrl || imageUrl.trim() === '' || imageUrl.trim() === '-') {
-        Swal.fire({ title: t('noTemplate'), text: t('noTemplateText'), icon: 'info' }).then(() => returnToMenu());
-        return;
-      }
-      Swal.fire({ title: t('loadingCert'), text: t('loadingCertText'), allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-      
-      if (certType === '1') {
-        CERT_CONFIG = {
-          name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
-          certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
-        };
-      } else if (certType === '2') {
-        CERT_CONFIG = {
-          name:   { bottomOffset: "54.5%", baseSize: 72, color: "#1b1e4b" },
-          certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
-        };
-      } else if (certType === '3') {
-        CERT_CONFIG = {
-          name:   { bottomOffset: "48.2%", baseSize: 72, color: "#1b1e4b" },
-          certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
-        };
-      } else if (certType === '4') {
-        CERT_CONFIG = {
-          name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
-          certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
-        };
-      } else {
-        CERT_CONFIG = {
-          name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
-          certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
-        };
-      }
-      
-      try {
-        const certData = await callServer('getOrCreateCertId', {
-          teamId: activeMemberContext.teamId, personName,
-          roleType: activeMemberContext.roleType, certType
-        });
-        activeMemberContext.certificateId = certData.certificateId;
-        
-        if (certType === '1') currentCertIdsMap.rankCertId = certData.certificateId;
-        else if (certType === '2') currentCertIdsMap.medalCertId = certData.certificateId;
-        else if (certType === '3') currentCertIdsMap.joinCertId = certData.certificateId;
-        else if (certType === '4') currentCertIdsMap.rookieCertId = certData.certificateId;
-        
-        const b64 = await callServer('getImageBase64', { imageUrl });
-        Swal.close();
-        if (b64) {
-          globalActiveBase64 = b64;
-          document.getElementById('v1ModalImage').src = b64;
-          const nameEl = document.getElementById('v1NameText');
-          const fontSize = calcFontSize(personName, CERT_CONFIG.name.baseSize);
-          nameEl.textContent = personName;
-          nameEl.style.bottom = CERT_CONFIG.name.bottomOffset;
-          nameEl.style.fontSize = `${fontSize}px`;
-          nameEl.style.setProperty('color', CERT_CONFIG.name.color, 'important'); 
-          const idEl = document.getElementById('v1IdText');
-          idEl.textContent = certData.certificateId;
-          idEl.style.bottom = CERT_CONFIG.certId.bottomOffset;
-          idEl.style.left = CERT_CONFIG.certId.leftOffset;
-          idEl.style.fontSize = `${CERT_CONFIG.certId.baseSize}px`;
-          document.getElementById('zoomSlider').value = 0.5;
-          document.getElementById('zoomPct').textContent = '50%';
-          document.getElementById('v1ModalContent').style.transform = 'scale(0.5)';
-          document.getElementById('v1ImageModal').style.display = 'flex';
-        } else {
-          window.open(imageUrl, '_blank');
-          returnToMenu();
-        }
-      } catch (e) {
-        Swal.close();
-        Swal.fire('Error', t('errGetTemplate') + e.message, 'error').then(() => returnToMenu());
-      }
-    }
+  if (!imageUrl || imageUrl.trim() === '' || imageUrl.trim() === '-') {
+    Swal.fire({ title: t('noTemplate'), text: t('noTemplateText'), icon: 'info' }).then(() => returnToMenu());
+    return;
+  }
+  Swal.fire({ title: t('loadingCert'), text: t('loadingCertText'), allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-    const processCertGenerationAndPreview = processCertGenAndPreview;
+  // ═════════════════════════════════════════════════════════
+  // กำหนดพิกัดการจัดวางข้อความตามข้อกำหนดใหม่ (1, 2, 3, 4)
+  // ═════════════════════════════════════════════════════════
+  if (certType === '1') {
+    // 🏆 อันดับ 1 - 10 อยู่ตำแหน่ง 57.3%
+    CERT_CONFIG = {
+      name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
+      certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
+    };
+  } else if (certType === '2') {
+    // 🏅 เหรียญรางวัล ทอง/เงิน/ทองแดง อยู่ตำแหน่ง 60%
+    CERT_CONFIG = {
+      name:   { bottomOffset: "54.5%", baseSize: 72, color: "#1b1e4b" },
+      certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
+    };
+  } else if (certType === '3') {
+    // 📜 เข้าร่วมแข่งขัน อยู่ตำแหน่ง 48.2%
+    CERT_CONFIG = {
+      name:   { bottomOffset: "48.2%", baseSize: 72, color: "#1b1e4b" },
+      certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
+    };
+  } else if (certType === '4') {
+    // 🚀 Rookie Award (จัดให้อยู่ที่ 57.3% หรือตั้งพิกัดแยกอิสระได้ที่นี่)
+    CERT_CONFIG = {
+      name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
+      certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
+    };
+  } else {
+    CERT_CONFIG = {
+      name:   { bottomOffset: "57.3%", baseSize: 72, color: "#1b1e4b" },
+      certId: { bottomOffset: "1.4%", leftOffset: "77.2%", baseSize: 22 }
+    };
+  }
+  // ═════════════════════════════════════════════════════════
+
+  try {
+    const certData = await callServer('getOrCreateCertId', {
+      teamId: activeMemberContext.teamId, personName,
+      roleType: activeMemberContext.roleType, certType
+    });
+    activeMemberContext.certificateId = certData.certificateId;
     
+    // บันทึกเก็บรหัสลงใน Map ชั่วคราว
+    if (certType === '1') currentCertIdsMap.rankCertId = certData.certificateId;
+    else if (certType === '2') currentCertIdsMap.medalCertId = certData.certificateId;
+    else if (certType === '3') currentCertIdsMap.joinCertId = certData.certificateId;
+    else if (certType === '4') currentCertIdsMap.rookieCertId = certData.certificateId;
+
+    const b64 = await callServer('getImageBase64', { imageUrl });
+    Swal.close();
+
+    if (b64) {
+      globalActiveBase64 = b64;
+      document.getElementById('v1ModalImage').src = b64;
+
+      const nameEl = document.getElementById('v1NameText');
+      const fontSize = getFitFontSize(personName, CERT_CONFIG.name.baseSize, MAX_TEXT_WIDTH);
+      nameEl.textContent = personName;
+      nameEl.style.bottom = CERT_CONFIG.name.bottomOffset;
+      nameEl.style.fontSize = `${fontSize}px`;
+      nameEl.style.setProperty('color', CERT_CONFIG.name.color, 'important'); 
+
+      const idEl = document.getElementById('v1IdText');
+      idEl.textContent = certData.certificateId;
+      idEl.style.bottom = CERT_CONFIG.certId.bottomOffset;
+      idEl.style.left = CERT_CONFIG.certId.leftOffset;
+      idEl.style.fontSize = `${CERT_CONFIG.certId.baseSize}px`;
+
+      document.getElementById('zoomSlider').value = 0.5;
+      document.getElementById('zoomPct').textContent = '50%';
+      document.getElementById('v1ModalContent').style.transform = 'scale(0.5)';
+      document.getElementById('v1ImageModal').style.display = 'flex';
+    } else {
+      window.open(imageUrl, '_blank');
+      returnToMenu();
+    }
+  } catch (e) {
+    Swal.close();
+    Swal.fire('Error', t('errGetTemplate') + e.message, 'error').then(() => returnToMenu());
+  }
+}
+
+    /* alias for swal buttons */
+    const processCertGenerationAndPreview = processCertGenAndPreview;
+
     /* ════ PDF DOWNLOAD ════ */
     function triggerPDFCompileV1() {
       if (!globalActiveBase64 || !activeMemberContext) return;
       Swal.fire({ title: t('generatingPdf'), text: t('loadingCertText'), allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
       const box = document.getElementById('v1HiddenRenderBox');
       box.innerHTML = '';
       const wrap = document.createElement('div');
       wrap.style.cssText = 'position:relative;width:1200px;background:white;';
+
       const img = document.createElement('img');
       img.src = globalActiveBase64;
       img.style.cssText = 'width:100%;display:block;';
+
       const nameDiv = document.createElement('div');
-      const pdfFs = calcFontSize(activeMemberContext.personName, CERT_CONFIG.name.baseSize);
+      const pdfFs = getFitFontSize(activeMemberContext.personName, CERT_CONFIG.name.baseSize, MAX_TEXT_WIDTH);
       nameDiv.className = 'cert-overlay-name';
       nameDiv.textContent = activeMemberContext.personName;
       nameDiv.style.cssText = `bottom:${CERT_CONFIG.name.bottomOffset};font-size:${pdfFs}px;font-weight:700;color:#1c1d4b;`;
+
       const idDiv = document.createElement('div');
       idDiv.className = 'cert-overlay-id';
       idDiv.textContent = activeMemberContext.certificateId;
       idDiv.style.cssText = `bottom:${CERT_CONFIG.certId.bottomOffset};left:${CERT_CONFIG.certId.leftOffset};font-size:${CERT_CONFIG.certId.baseSize}px;font-weight:700;color:#1e3530;background:#fff;padding:4px 12px;border-radius:4px;`;
+
       wrap.appendChild(img); wrap.appendChild(nameDiv); wrap.appendChild(idDiv);
       box.appendChild(wrap);
+
       img.onload = () => {
         const nW = img.naturalWidth || 1200, nH = img.naturalHeight || 850;
         html2canvas(wrap, { scale: 3, useCORS: true }).then(canvas => {
@@ -1433,17 +1617,18 @@
       document.getElementById('v1IdText').textContent = '';
       returnToMenu();
     }
-    
+
     function returnToMenu() {
-      if (!activeMemberContext) return;
-      renderCertMenu(
-        activeMemberContext.personName, 
-        activeMemberContext.rankNum, 
-        activeMemberContext.rawMedal, 
-        activeMemberContext.roleLabel, 
-        currentCertIdsMap
-      );
-    }
+  if (!activeMemberContext) return;
+  // เรียกใช้งานเมนูโดยส่งค่า Context ปัจจุบันกลับไปแสดงผลเหมือนเดิม
+  renderCertMenu(
+    activeMemberContext.personName, 
+    activeMemberContext.rankNum, 
+    activeMemberContext.rawMedal, 
+    activeMemberContext.roleLabel, 
+    currentCertIdsMap
+  );
+}
   </script>
 </body>
 </html>
