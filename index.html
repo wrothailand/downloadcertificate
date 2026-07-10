@@ -283,41 +283,55 @@
        TABLE
        ══════════════════════════════════════════════ */
     .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-    }
+  width: 100%;
+  border-collapse: separate; /* ต้องเปลี่ยนเป็น separate เพื่อให้ทำมุมโค้งและใส่ blur ได้ */
+  border-spacing: 0;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.4); /* พื้นหลังโปร่งแสง */
+  backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-md); /* มุมโค้ง */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  overflow: hidden; 
+}
 
-    .data-table thead tr {
-      background: rgba(41,169,224,0.03);
-      border-bottom: 1px solid var(--border-glass);
-    }
+.data-table thead tr {
+  background: rgba(255, 255, 255, 0.2); /* หัวตารางโปร่งแสง */
+  border-bottom: 1px solid var(--border-glass);
+}
 
-    .data-table thead th {
-      padding: 12px 16px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
+.data-table thead th {
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
 
-    .data-table tbody tr {
-      border-bottom: 1px solid var(--border-light);
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+.data-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
-    .data-table tbody tr:last-child { border-bottom: none; }
-    .data-table tbody tr:hover { background: rgba(41,169,224,0.02); }
-    .data-table tbody tr.row-active { background: rgba(41,169,224,0.05) !important; }
+.data-table tbody tr:last-child { border-bottom: none; }
 
-    .data-table tbody td {
-      padding: 16px 16px;
-      vertical-align: middle;
-      color: var(--text-body);
-    }
+/* เอฟเฟกต์ Hover */
+.data-table tbody tr:hover { 
+  background: rgba(255, 255, 255, 0.3) !important; 
+}
+
+.data-table tbody tr.row-active { 
+  background: rgba(41, 169, 224, 0.15) !important; /* ยังคงสีไฮไลท์เดิมไว้ */
+}
+
+.data-table tbody td {
+  padding: 16px 16px;
+  vertical-align: middle;
+  color: var(--text-body);
+}
 
     .rank-chip {
       display: inline-flex;
